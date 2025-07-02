@@ -1,9 +1,21 @@
-import React, { useState } from 'react';
-import { Menu, X, User } from 'lucide-react'; // Lucide icons, now including User
+import React, { useState, useEffect } from 'react';
+import { Menu, X, User } from 'lucide-react';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
   const toggleMenu = () => setIsOpen(!isOpen);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const offset = window.scrollY;
+      setScrolled(offset > 10); // Adjust threshold if needed
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const navLinks = [
     { label: 'Home', href: '#home' },
@@ -14,11 +26,15 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="fixed w-full bg-gradient-to-l from-gray-900 to-black bg-opacity-90 backdrop-blur-sm z-50 shadow-lg text-white">
+    <nav className={`fixed w-full z-50 shadow-lg text-white transition-all duration-300 ${
+      scrolled
+        ? 'bg-black/60 backdrop-blur-lg'
+        : 'bg-gradient-to-l from-gray-900 to-black bg-opacity-90'
+    }`}>
       <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
-        {/* Name with Icon */}
-        <div className="flex items-center space-x-2"> {/* Added flex container for icon and text */}
-          <User className="w-8 h-8 text-[#646cff]" /> {/* Lucide User icon */}
+        {/* Logo and name */}
+        <div className="flex items-center space-x-2">
+          <User className="w-8 h-8 text-[#646cff]" />
           <h1 className="font-bold text-[#646cff]">VRAJ PATEL</h1>
         </div>
 
@@ -31,13 +47,12 @@ const Navbar = () => {
                 onClick={() => setIsOpen(false)}
                 className="hover:text-purple-400 transition duration-300 relative group">
                 {link.label}
-                
               </a>
             </li>
           ))}
         </ul>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Menu Icon */}
         <button onClick={toggleMenu} className="md:hidden text-white focus:outline-none">
           {isOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
