@@ -135,6 +135,7 @@ button:focus-visible {
 /* tailwind.css or global CSS */
 .text-gradient {
   background: linear-gradient(to right, #7f5af0, #6246ea);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
