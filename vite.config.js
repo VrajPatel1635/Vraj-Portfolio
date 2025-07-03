@@ -7,5 +7,6 @@ export default defineConfig({
   plugins: [react(),
     tailwindcss()
   ],
-  base:"/Vraj-Portfolio"
+  base:"/Vraj-Portfolio",
+  assetsInclude: ['**/*.glb']
 })

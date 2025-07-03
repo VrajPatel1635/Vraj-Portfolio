@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, User } from 'lucide-react';
+import VPLogo from '../assets/vpLogo.jpg'
+import { px } from 'framer-motion';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -34,7 +36,7 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
         {/* Logo and name */}
         <div className="flex items-center space-x-2">
-          <User className="w-8 h-8 text-[#646cff]" />
+          <img src={VPLogo} alt="logo" className='w-16 h-16' />
           <h1 className="font-bold text-[#646cff]">VRAJ PATEL</h1>
         </div>
 
