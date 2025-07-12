@@ -16,29 +16,29 @@ const getLevel = (percent) => {
 
 // Component for individual skill progress bars.
 const SkillBar = ({ name, percent }) => (
-  <Tilt>
-    <motion.div
-      className="mb-4 group transition-all duration-300 w-full"
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: 'easeOut' }}
-      viewport={{ once: true }}
-    >
-      <div className="flex justify-between text-sm font-medium mb-1">
-        <span className="text-slate-200 group-hover:text-cyan-300 transition-colors duration-300">{name}</span>
-        <span className="text-slate-400 group-hover:text-cyan-300 transition-colors duration-300">{getLevel(percent)}</span>
-      </div>
-      <div className="relative w-full h-2 rounded-full bg-slate-800 overflow-hidden">
-        <motion.div
-          className="absolute h-full rounded-full bg-gradient-to-r from-emerald-400 via-cyan-400 to-purple-500 shadow-md shadow-cyan-400/20"
-          initial={{ width: 0 }}
-          whileInView={{ width: `${percent}%` }}
-          transition={{ duration: 1.2, ease: 'easeOut' }}
-          viewport={{ once: true }}
-        />
-      </div>
-    </motion.div>
-  </Tilt>
+  // <Tilt>
+  <motion.div
+    className="mb-4 group transition-all duration-300 w-full"
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6, ease: 'easeOut' }}
+    viewport={{ once: true }}
+  >
+    <div className="flex justify-between text-sm font-medium mb-1">
+      <span className="text-slate-200 group-hover:text-cyan-300 transition-colors duration-300">{name}</span>
+      <span className="text-slate-400 group-hover:text-cyan-300 transition-colors duration-300">{getLevel(percent)}</span>
+    </div>
+    <div className="relative w-full h-2 rounded-full bg-slate-800 overflow-hidden">
+      <motion.div
+        className="absolute h-full rounded-full bg-gradient-to-r from-emerald-400 via-cyan-400 to-purple-500 shadow-md shadow-cyan-400/20"
+        initial={{ width: 0 }}
+        whileInView={{ width: `${percent}%` }}
+        transition={{ duration: 1.2, ease: 'easeOut' }}
+        viewport={{ once: true }}
+      />
+    </div>
+  </motion.div>
+  // </Tilt>
 );
 
 // Component for the animated cards that hold the skill bars.
@@ -46,7 +46,7 @@ const AnimatedCard = ({ title, children }) => (
   <Tilt>
     <motion.div
       whileHover={{ scale: 1.05 }}
-      className="relative group p-[2px] rounded-2xl bg-gradient-to-tr from-[#4e54c8] to-[#8f94fb]"
+      className="w-[90%] relative group p-[2px] rounded-2xl bg-gradient-to-tr from-[#4e54c8] to-[#8f94fb]"
     >
       <div className="bg-gradient-to-br from-[#1f1c2c] to-[#928dab] backdrop-blur-xl bg-opacity-20 rounded-2xl p-6 transition-all duration-500 group-hover:shadow-xl group-hover:shadow-cyan-500/40 h-full">
         <h3 className="text-lg font-bold text-center bg-gradient-to-r from-cyan-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">{title}</h3>
@@ -81,6 +81,10 @@ const skillData = [
 const InfiniteSkillCarousel = () => {
   const animationFrameRef = useRef();
   const [x, setX] = useState(0);
+  const [rotate, setRotate] = useState(false);
+  const handleClick = () => {
+    setRotate(prev => prev + 360);
+  };
 
   const speed = 0.5;
   const itemWidth = 112; // w-28
@@ -132,8 +136,15 @@ const InfiniteSkillCarousel = () => {
             glareColor="#ffffff"
           >
             <div className="flex-shrink-0 w-32 h-32 carousel-item bg-gradient-to-br from-[#1f1c2c] to-[#928dab] p-[2px] rounded-xl shadow-lg shadow-purple-600/30">
-              <div className="w-full h-full flex flex-col items-center justify-center bg-[#0f0c29] rounded-xl cursor-pointer">
-                <div className="text-2xl mb-1">{skill.icon}</div>
+              <div className="w-full h-full flex flex-col items-center justify-center bg-[#0f0c29] rounded-xl cursor-pointer"
+                onClick={handleClick}>
+                <motion.div
+                  animate={rotate ? { rotate: 360 } : { rotate: 0 }}
+                  transition={{ duration: 0.6, ease: "easeInOut" }}
+                  className="text-3xl sm:text-4xl mb-2"
+                >
+                  {skill.icon}
+                </motion.div>
                 <span className="text-sm font-semibold text-white text-center">
                   {skill.label}
                 </span>
@@ -152,13 +163,13 @@ const InfiniteSkillCarousel = () => {
 // The main Skills section component.
 const App = () => {
   return (
-    <section className="w-screen py-12 px-4 bg-black" id="skills">
+    <section className="w-screen min-w-full py-12 px-4 bg-black overflow-x-hidden" id="skills">
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: 'easeOut' }}
         viewport={{ once: true }}
-        className="p-8 rounded-2xl"
+        className="rounded-2xl"
       >
         <div className="max-w-6xl mx-auto text-center mb-12">
           <h2 className="text-3xl font-bold mb-2 bg-gradient-to-r from-cyan-400 via-fuchsia-500 to-pink-500 bg-clip-text text-transparent">
