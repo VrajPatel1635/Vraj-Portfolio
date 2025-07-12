@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import myImage from '../assets/vraj.jpg';
+import Silk from '../Design/Silk';
+import profile from '../assets/Adobe_Express-file.png';
+import Particles from '../Design/Particles'
+import { Send, FolderOpen } from 'lucide-react';
 
 const Hero = () => {
   const words = [
@@ -39,134 +43,65 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="relative h-screen flex items-center justify-center bg-black text-white overflow-hidden"
+      className="w-full relative h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Background Image + Gradient Overlay */}
-      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1510906594845-bc082582c8cc?q=80&w=1144&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] bg-cover bg-center">
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/80" />
+      {/* Background Layer */}
+      <div className="absolute h-full w-full">
+        <div className="absolute inset-0 bg-black z-0" />
+
+        {/* Particles Overlay */}
+        <Particles
+          particleColors={['#ffffff', '#00f0ff']}
+          particleCount={200}
+          particleSpread={10}
+          speed={0.1}
+          particleBaseSize={100}
+          moveParticlesOnHover={true}
+          alphaParticles={false}
+          disableRotation={false}
+        />
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10 flex flex-col-reverse md:flex-row items-center justify-between max-w-7xl w-full px-6 md:px-12">
-        {/* Left: Text Content */}
-        <div className="backdrop-blur-sm bg-white/5 p-8 rounded-xl max-w-2xl animate-fade-in">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight">
-            Hi, I'm <span className="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">Vraj Patel</span> 👋
-          </h1>
-          <h2 className="text-xl sm:text-2xl lg:text-3xl mt-4 text-purple-300 font-mono">
-            {currentText}
-            <span className="animate-blink">|</span>
-          </h2>
+      <div className="bg-transparent relative z-10 flex flex-col items-center justify-center text-center px-6 md:px-12 max-w-4xl">
+        <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-tight">
+          Hi, I'm <span className="bg-gradient-to-r from-blue-500 via-white to-blue-500 bg-clip-text text-transparent">Vraj Patel</span> 👋
+        </h1>
 
-          <div className="mt-8 flex gap-4">
-            <a
-              href="#projects"
-              className="relative px-8 py-3 rounded-full font-semibold text-white bg-gradient-to-r from-purple-500 via-pink-500 to-cyan-400 shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-pink-400 after:absolute after:inset-0 after:rounded-full after:ring-2 after:ring-white/30 after:opacity-0 hover:after:opacity-100 after:transition"
-              style={{ overflow: 'hidden' }}
-            >
-              View Projects
-            </a>
-            <a
-              href="#contact"
-              className="relative px-8 py-3 rounded-full font-semibold text-pink-400 border-2 border-pink-400 bg-white/10 shadow-lg transition-all duration-300 hover:bg-pink-500 hover:text-white hover:scale-105 hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-pink-400 after:absolute after:inset-0 after:rounded-full after:ring-2 after:ring-white/30 after:opacity-0 hover:after:opacity-100 after:transition"
-              style={{ overflow: 'hidden' }}
-            >
-              Contact Me
-            </a>
-          </div>
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl mt-6 text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-cyan-400 to-pink-400 font-mono">
+          {currentText}<span className="animate-blink">|</span>
+        </h2>
+
+        <div className="flex flex-wrap gap-6 justify-center items-center mt-6">
+          {/* View Projects Button */}
+          <a
+            href="#projects"
+            className="relative group flex items-center gap-3 px-10 py-4 rounded-full font-semibold text-black text-lg bg-gradient-to-r from-purple-500 via-pink-500 to-cyan-400 shadow-lg transition-all duration-500 transform hover:scale-115 hover:shadow-2xl hover:from-cyan-400 hover:via-pink-500 hover:to-purple-500"
+          >
+            <FolderOpen
+              className="w-7 h-7 text-white bg-black/20 p-1 rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+            />
+            View Projects
+          </a>
+
+          {/* Contact Me Button */}
+          <a
+            href="#contact"
+            className="relative group flex items-center gap-3 px-10 py-4 rounded-full font-semibold text-white text-lg border-2 border-transparent shadow-lg transition-all duration-500 transform hover:scale-115 bg-gradient-to-r from-rose-500 via-orange-400 to-yellow-300 hover:from-yellow-300 hover:via-orange-400 hover:to-rose-500 hover:shadow-2xl"
+          >
+            <Send
+              className="w-7 h-7 text-white bg-black/20 p-1 rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+            />
+            Contact Me
+          </a>
         </div>
-
-        {/* Right: Profile Image with Neon Glowing Circular Border */}
-        <div className="relative flex items-center justify-center w-[260px] h-[260px] md:w-[320px] md:h-[320px] mb-10 md:mb-0 md:ml-16 animate-fade-in">
-          <div className="absolute inset-0 rounded-full animate-glow" />
-          <img
-            src={myImage}
-            alt="Vraj Patel"
-            className="rounded-full object-cover w-full h-full border-4 border-white shadow-lg relative z-10"
-          />
-        </div>
-
-
-
 
       </div>
 
-      {/* Custom Animations */}
-      <style>{`
-        @keyframes blink {
-          0%, 100% { opacity: 1 }
-          50% { opacity: 0 }
-        }
-        .animate-blink {
-          animation: blink 1s step-start infinite;
-        }
-
-        @keyframes fade-in {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-in {
-          animation: fade-in 1s ease-out forwards;
-        }
-
-        @keyframes pulse-shadow {
-          0%, 100% {
-            box-shadow: 0 0 10px rgba(168, 85, 247, 0.6), 0 0 20px rgba(236, 72, 153, 0.4);
-          }
-          50% {
-            box-shadow: 0 0 20px rgba(168, 85, 247, 0.8), 0 0 30px rgba(236, 72, 153, 0.6);
-          }
-        }
-        .animate-pulse-shadow {
-          animation: pulse-shadow 2s infinite;
-        }
-          .hexagon-wrapper {
-  width: 224px; /* 56 * 4px = 224px (Tailwind's w-56) */
-  height: 194px;
-  position: relative;
-}
-
-.hexagon {
-  width: 100%;
-  padding-bottom: 86.6%; /* Height of hexagon = width * √3 / 2 */
-  background: linear-gradient(to top right, #a855f7, #ec4899);
-  clip-path: polygon(
-    25% 5%, 75% 5%,
-    100% 50%,
-    75% 95%, 25% 95%,
-    0% 50%
-  );
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  animation: pulse-shadow 2s infinite;
-}
-
-.hexagon img {
-  width: 90%;
-  height: 90%;
-  object-fit: cover;
-  clip-path: inherit;
-  border: 2px solid white;
-}
-
-@keyframes glow {
-  0%, 100% {
-    box-shadow:
-      0 0 40px 10px #00fff7,
-      0 0 80px 20px #a855f7,
-      0 0 120px 40px #ec4899;
-  }
-  50% {
-    box-shadow: 0 0 64px 16px #a855f7, 0 0 96px 32px #22d3ee, 0 0 128px 48px #ec4899;
-  }
-}
-.animate-glow {
-  animation: glow 3s ease-in-out infinite;
-}
-
-      `}</style>
+      
     </section>
+
+
   );
 };
 

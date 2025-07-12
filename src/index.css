@@ -1,4 +1,26 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&display=swap');
+
+/* Apply Outfit for headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Outfit', sans-serif;
+}
+
+/* Apply Inter for body text */
+body,
+p,
+span,
+a,
+li,
+button {
+  font-family: 'Inter', sans-serif;
+}
 
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -14,6 +36,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 html {
   scroll-behavior: smooth;
 }
@@ -23,15 +46,19 @@ a {
   /* color: #646cff; */
   text-decoration: inherit;
 }
+
 a:hover {
-  color: #535bf2;
+  color: #7B7481;
 }
 
 body {
+  font-family: 'Poppins', sans-serif;
+  font-family: 'Inter', sans-serif;
   margin: 0;
   display: flex;
   place-items: center;
   min-height: 100vh;
+  width: 100%;
 }
 
 h1 {
@@ -50,9 +77,11 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
   border-color: #646cff;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
@@ -63,9 +92,11 @@ button:focus-visible {
     color: #213547;
     background-color: #ffffff;
   }
+
   a:hover {
     color: #747bff;
   }
+
   button {
     background-color: #f9f9f9;
   }
@@ -75,6 +106,7 @@ button:focus-visible {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
@@ -94,6 +126,7 @@ button:focus-visible {
       opacity: 0;
       transform: translateY(20px);
     }
+
     to {
       opacity: 1;
       transform: translateY(0);
@@ -107,10 +140,12 @@ button:focus-visible {
     stroke-dashoffset: 1000;
     opacity: 1;
   }
+
   50% {
     stroke-dashoffset: 0;
     opacity: 1;
   }
+
   100% {
     stroke-dashoffset: 0;
     opacity: 0;
@@ -122,10 +157,13 @@ button:focus-visible {
 }
 
 @keyframes pulse {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 1;
     transform: scale(1);
   }
+
   50% {
     opacity: 0.5;
     transform: scale(1.15);
@@ -140,5 +178,105 @@ button:focus-visible {
   -webkit-text-fill-color: transparent;
 }
 
+@keyframes glow {
 
+  0%,
+  100% {
+    box-shadow: 0 0 20px #60a5fa;
+  }
+
+  50% {
+    box-shadow: 0 0 40px #3b82f6;
+  }
+}
+
+@keyframes blink {
+
+  0%,
+  100% {
+    opacity: 1
+  }
+
+  50% {
+    opacity: 0
+  }
+}
+
+.animate-blink {
+  animation: blink 1s step-start infinite;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 1s ease-out forwards;
+}
+
+@keyframes pulse-shadow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 10px rgba(168, 85, 247, 0.6), 0 0 20px rgba(236, 72, 153, 0.4);
+  }
+
+  50% {
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.8), 0 0 30px rgba(236, 72, 153, 0.6);
+  }
+}
+
+.animate-pulse-shadow {
+  animation: pulse-shadow 2s infinite;
+}
+
+.card-spotlight {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-spotlight::before {
+  content: "";
+  position: absolute;
+  top: var(--y, 50%);
+  left: var(--x, 50%);
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.2), transparent 60%);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  transition: opacity 0.2s;
+  opacity: 0;
+}
+
+.card-spotlight:hover::before {
+  opacity: 1;
+}
+
+@keyframes borderPulse {
+  0% {
+    border-color: #9333ea;
+    box-shadow: 0 0 10px #9333ea;
+  }
+  50% {
+    border-color: #8b5cf6;
+    box-shadow: 0 0 20px #8b5cf6;
+  }
+  100% {
+    border-color: #9333ea;
+    box-shadow: 0 0 10px #9333ea;
+  }
+}
+
+.animate-borderPulse {
+  animation: borderPulse 2s infinite;
+}
 
